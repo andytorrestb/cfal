@@ -37,7 +37,7 @@ vertices #codeStream
         points[8] = point(40, 20, -0.5);
         points[9] = point(40, 15, -0.5);
         points[10] = point(40, 3.74, -0.5); // end of nozzle
-        points[11] = point(29, 3, -0.5);
+        points[11] = point(28.8, 2.58326, -0.5);
         points[12] = point(25, 12.99, -0.5); // midpoint
         points[13] = point(25, 20, -0.5);
         points[14] = point(0, 20, -0.5);
