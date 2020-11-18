@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NUM_ARGS 3
+
 typedef struct WindTunnel
 {
     double tunnel_number;
@@ -95,10 +97,38 @@ WindTunnel *createWindTunnel(double tunnel_number, double wedge_angle, double sc
     return mesh;
 }
 
-
-int main(void)
+void printSyntaxHelper()
 {
-    FILE *blockMeshDict = fopen("blockMeshDict", "w");
+    printf("\n          Seems like you've entered the wrong syntax.\n");
+    printf("       Try running the program with the following flags\n");
+    printf("      $ ./wedgeFoil <tunnel_number> <wedge_angle> <scale>\n\n");
+}
+
+int main(int argc, char **argv)
+{
+    int i;
+    double tunnel_number, wedge_angle, scale;
+    WindTunnel *mesh;
+    FILE *blockMeshDict;
+    // needed for strtod();
+    char *eptr;
+
+    // Check that user used proper syntax when running the program.
+    for (i = 1; i <= 3; i++)
+    {
+        if (argv[i] == NULL)
+        {
+            printSyntaxHelper();
+            return -1;
+        }
+    }
+
+    tunnel_number = strtod(argv[1], &eptr);
+    wedge_angle = strtod(argv[2], &eptr);
+    scale = strtod(argv[3], &eptr);
+
+    createWindTunnel(tunnel_number, wedge_angle, scale);
+    blockMeshDict = fopen("blockMeshDict", "w");
 
     printHeader(blockMeshDict);
     // printParameters();
@@ -109,5 +139,6 @@ int main(void)
     // printFunctions();
 
     fclose(blockMeshDict);
+    free(mesh);
     return 0;
 }
