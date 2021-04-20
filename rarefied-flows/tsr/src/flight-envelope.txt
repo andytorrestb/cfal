@@ -12,7 +12,7 @@ Goal:
 
                     where U := M x N , M & N >= 1 
 
-    where M is the number of Ma values provided, and N is the number of h values provided.  
+    where M is the number of Ma values provided, and N is the number of h values provided (ints).
 
 Pseudocode (for Python):
 
