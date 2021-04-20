@@ -1,0 +1,38 @@
+Goal: 
+    Create a program that can autogenerate the required unique case files
+    for running simulations within a given "flight envelope". This envelope is 
+    based off the user inputs for Mach number (Ma) and altitude (h). User will also be 
+    required to enter inputs for mesh fidelity (f), and runtime (t) 
+    (possibly make these optional paramters with default values).
+
+    In order to the deliver on the idea of flight envelope,
+    User will also have the option to insert Ma and h as a range of values. 
+
+    The program will then produce U unique cases to simulate.  
+
+                    where U := M x N , M & N >= 1 
+
+    where M is the number of Ma values provided, and N is the number of h values provided.  
+
+Pseudocode (for Python):
+
+        Instantiate required data structures.
+            a. template case - case we copy and edit values of. 
+            b. pandas.DataFrame - data structure used to store all the data and meta data
+                                  for the produced cases. Will approx have shape of (U, n_features)
+
+        Read in user input for Ma and h
+
+    Nested loop | for each U, 
+
+        Calculate required parameters, and store in the correct record. 
+            a. rho(h) - density -> numerical density ? Re, Kn
+            b. T(h) - temperature
+            c. u(Ma) - velocity 
+            d. P(h) is possibe. 
+            e. mu(?) - viscocity ?????
+            e. Re(rho, u, etc.)
+            f. Kn(rho, L?)
+        
+        Make a copy of the template case with the values replaced
+        Produce the data needed to run the geometry study produced by Guo and Luo.
