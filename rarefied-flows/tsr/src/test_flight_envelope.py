@@ -1,11 +1,25 @@
 import unittest
-import flight_envelope
+from flight_envelope import FlightEnvelope
 
-class TestCalc(unittest.TestCase):
+class TestFlightEnvelope(unittest.TestCase):
 
-    def test_add(self):
-        result  = flight_envelope.add(10, 5)
-        self.assertEqual(result, 15)
+    @classmethod
+    def setUpClass(cls):
+        print('setupClass')
+
+    @classmethod
+    def tearDownClass(cls):
+        print('teardownClass')
+
+    def setUp(self):
+        print('setUp')
+        self.fe_1 = FlightEnvelope()
+
+    def test_init(self):
+        self.assertIsInstance(self.fe_1.h, list, '')
+        self.assertIsInstance(self.fe_1.Ma, list, '')
+        self.assertIsInstance(self.fe_1.f, int, '')
+        self.assertIsInstance(self.fe_1.t, float, '')
 
 
 if __name__ == '__main__':
