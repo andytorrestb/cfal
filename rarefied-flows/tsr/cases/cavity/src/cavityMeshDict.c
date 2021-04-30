@@ -284,7 +284,8 @@ Cavity *createCavity(double L, double R, double theta, int grading)
     return cavity;
 }
 
-// Sets coordinates for creatings FlowDomain according to values stored in Cavity struct
+// Sets coordinates for creatings FlowDomain 
+// according to values stored in Cavity struct
 void setCoordinates(FlowDomain *mesh)
 {
     Cavity *cavity = mesh->cavity;
@@ -380,6 +381,22 @@ void printToFile(FILE *blockMeshDict, FlowDomain *mesh)
     return;
 }
 
+int validArguments()
+{
+    // Check that user used proper syntax when running the program.
+    for (i = 1; i <= NUM_ARGS; i++)
+    {
+        if (argv[i] == NULL)
+        {
+            // TODO: Update
+            printSyntaxHelper();
+            return 0;
+        }
+    }
+
+    return 1
+}
+
 int main(int argc, char **argv)
 {
     int i;
@@ -390,15 +407,9 @@ int main(int argc, char **argv)
     FlowDomain *mesh;
     FILE *blockMeshDict;
 
-    // Check that user used proper syntax when running the program.
-    for (i = 1; i <= NUM_ARGS; i++)
+    if (!validArguments())
     {
-        if (argv[i] == NULL)
-        {
-            // TODO: Update
-            printSyntaxHelper();
-            return -1;
-        }
+        return -1;
     }
 
     // Convert command line argumnets from strings to numbers.
