@@ -188,14 +188,34 @@ class MetaDataGenerator:
                       self.df[feature][record] = theta
                   record += 1
 
+  # For make files structures for each possible value. 
+  # First check to see if path exists.
   def make_case_dirs(self):
-      for h in self.h_range:
-        os.system("mkdir " + str(h))
-        for Ma in self.Ma_range:
-          os.system("mkdir " + str(h) + "/" + str(Ma))
-          for L in self.L_range:
-            os.system("mkdir " + str(h) + "/" + str(Ma) + "/" + str(L))  
-            for H in self.H_range:
-              os.system("mkdir " + str(h) + "/" + str(Ma) + "/" + str(L) + "/" + str(H))
-              for theta in self.theta_range:
-                os.system("mkdir " + str(h) + "/" + str(Ma) + "/" + str(L) + "/" + str(H) + "/" + str(theta))
+    for h in self.h_range:
+      h_path = str(h)
+      if not os.path.isfile(wpw(h_path)):
+        os.system("mkdir " + h_path)
+      for Ma in self.Ma_range:
+        Ma_path = h_path + "/" + str(Ma)
+        if not os.path.isfile(wpw(Ma_path)):
+          os.system("mkdir " + wpw(Ma_path))
+        for L in self.L_range:
+          L_path = Ma_path +  "/" + str(L)
+          if not os.path.isfile(wpw(L_path)):
+            os.system("mkdir " + wpw(L_path))  
+          for H in self.H_range:
+            H_path = L_path + "/" + str(H)
+            if not os.path.isfile(wpw(H_path)):
+              os.system("mkdir " + wpw(H_path))
+            for theta in self.theta_range:
+              theta_path = H_path + "/" + str(theta)
+              if not os.path.isfile(wpw(theta_path)):
+                os.system("mkdir " + wpw(theta_path))
+    
+  def rm_case_dirs(self):
+    for h in self.h_range:
+      os.system("rd /s /q " + wpw(str(h)))
+
+# wpw = windows path wrapper
+def wpw(str):
+  return "\"" + str + "\""
