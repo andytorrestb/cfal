@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1912                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "0.00017/uniform/functionObjects";
+    object      functionObjectProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+results
+{
+    forces1
+    {
+        vector
+        {
+            normalForce     ( 0 0 0 );
+            tangentialForce ( 0 0 0 );
+            porousForce     ( 0 0 0 );
+            normalMoment    ( 0 0 0 );
+            tangentialMoment ( 0 0 0 );
+            porousMoment    ( 0 0 0 );
+        }
+    }
+}
+
+fieldAverage1
+{
+    rhoN
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    rhoM
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    dsmcRhoN
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    momentum
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    linearKE
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    internalE
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    iDof
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    q
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+    fD
+    {
+        totalIter       85;
+        totalTime       0.0001699999999999997;
+    }
+}
+
+
+// ************************************************************************* //

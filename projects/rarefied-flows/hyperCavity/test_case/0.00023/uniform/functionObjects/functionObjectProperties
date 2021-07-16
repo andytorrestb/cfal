@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1912                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "0.00023/uniform/functionObjects";
+    object      functionObjectProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+results
+{
+    forces1
+    {
+        vector
+        {
+            normalForce     ( 0 0 0 );
+            tangentialForce ( 0 0 0 );
+            porousForce     ( 0 0 0 );
+            normalMoment    ( 0 0 0 );
+            tangentialMoment ( 0 0 0 );
+            porousMoment    ( 0 0 0 );
+        }
+    }
+}
+
+fieldAverage1
+{
+    rhoN
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    rhoM
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    dsmcRhoN
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    momentum
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    linearKE
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    internalE
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    iDof
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    q
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+    fD
+    {
+        totalIter       115;
+        totalTime       0.0002299999999999996;
+    }
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1912                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     rhoCentralFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1;
+
+deltaT          0.0001;
+
+writeControl    runTime;
+
+writeInterval   0.02;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+adjustTimeStep  no;
+
+maxCo           1;
+
+maxDeltaT       1e-06;
+
+functions
+{
+    grad1 
+    {
+        type grad;
+        libs (fieldFunctionObjects);
+        field rho;
+        writeControl    runTime;
+        writePrecision  6;
+        writeInterval   0.02;
+    }
+
+    grad2 
+    {
+        type grad;
+        libs (fieldFunctionObjects);
+        field U;
+        writeControl    runTime;
+        writePrecision  6;
+        writeInterval   0.02;
+    }
+
+    grad3 
+    {
+        type grad;
+        libs (fieldFunctionObjects);
+        field T;
+        writeControl    runTime;
+        writePrecision  6;
+        writeInterval   0.02;
+    }
+
+    grad4 
+    {
+        type grad;
+        libs (fieldFunctionObjects);
+        field p;
+        writeControl    runTime;
+        writePrecision  6;
+        writeInterval   0.02;
+    }
+
+}
+
+
+
+// ************************************************************************* //
