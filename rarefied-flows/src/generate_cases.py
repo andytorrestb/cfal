@@ -1,5 +1,6 @@
 from meta_data_generator import MetaDataGenerator
 import case_coordinates as cc
+from jinja2 import FileSystemLoader
 
 # Parameters for generating lists used to build cases.
 Ma_params = { 'lower' : 1, 'upper' : 5, 'vals' : 10 }
@@ -11,4 +12,13 @@ params = { 'Ma' : Ma_params, 'h' : h_params, 'L' : L_params, 'H' : H_params }
 # Generate DataFrame containing simulation parameters.
 meta_data = MetaDataGenerator(parameters=params)
 
-print(meta_data.df)
+meta_data.make_case_dirs()
+
+cc.get_coordinates(meta_data)
+
+def path_of_row(row):
+    return str(row['h']) + '/' + str(row['Ma']) + '/' + str(row['L']) + '/' + str(row['H']) + '/' + str(row['theta']) 
+
+for index, row in meta_data.df.iterrows():
+    path_of_row = path_of_row(row)
+    cc.setup_0_dir(path_of_row, row)
