@@ -1,5 +1,6 @@
 import os
 from meta_data_generator import MetaDataGenerator
+from math import tan
 
 # Function to make directories
 def make_case_dir(path, record):
@@ -148,4 +149,5 @@ def get_coordinates(meta_data):
     print('for index = ', index)
     print("      ", get_x_vals(row), row['L'], row['theta'])
     print("      ", get_y_vals(row), row['H'])
+
 
