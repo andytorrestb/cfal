@@ -188,6 +188,10 @@ class MetaDataGenerator:
                       self.df[feature][record] = theta
                   record += 1
 
+
+  # TO-DO: Move this to a seperate file, loop through the records, 
+  # and try to make the file by checking each features of the respective record. 
+    
   # For make files structures for each possible value. 
   # First check to see if path exists.
   def make_case_dirs(self):
