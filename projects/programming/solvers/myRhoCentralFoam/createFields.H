@@ -37,6 +37,32 @@ volScalarField rho
     thermo.rho()
 );
 
+volVectorField gradRho
+(
+    IOobject
+    (
+        "gradRho",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    fvc::grad(rho)
+);
+
+volVectorField gradT
+(
+    IOobject
+    (
+        "gradRho",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    fvc::grad(thermo.T())
+);
+
 volVectorField rhoU
 (
     IOobject

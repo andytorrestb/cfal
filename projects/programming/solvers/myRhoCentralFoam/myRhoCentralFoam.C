@@ -198,6 +198,8 @@ int main(int argc, char *argv[])
         // --- Solve momentum
         solve(fvm::ddt(rhoU) + fvc::div(phiUp));
 
+        gradRho = fvc::grad(rho);
+
         U.ref() =
             rhoU()
            /rho();
