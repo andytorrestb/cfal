@@ -199,6 +199,8 @@ int main(int argc, char *argv[])
         solve(fvm::ddt(rhoU) + fvc::div(phiUp));
 
         gradRho = fvc::grad(rho);
+        gradT = fvc::grad(thermo.T());
+        gradP = fvc::grad(thermo.p());
 
         U.ref() =
             rhoU()
