@@ -37,6 +37,7 @@ volScalarField rho
     thermo.rho()
 );
 
+// Custon Code: Gradient Fields
 volVectorField gradRho
 (
     IOobject
@@ -47,7 +48,7 @@ volVectorField gradRho
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    fvc::grad(rho)
+    fvc::grad(rho) / rho
 );
 
 volVectorField gradT
@@ -60,7 +61,7 @@ volVectorField gradT
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    fvc::grad(thermo.T())
+    fvc::grad(thermo.T()) / thermo.T()
 );
 
 volVectorField gradP
@@ -73,7 +74,20 @@ volVectorField gradP
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    fvc::grad(thermo.p())
+    fvc::grad(thermo.p()) / thermo.p()
+);
+
+volScalarField Kn
+(
+    IOobject
+    (
+        "Kn",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    rho / rho
 );
 
 volVectorField rhoU
@@ -127,11 +141,6 @@ surfaceScalarField neg
 );
 
 surfaceScalarField phi("phi", fvc::flux(rhoU));
-
-
-
-
-
 
 
 Info<< "Creating turbulence model\n" << endl;

@@ -198,9 +198,10 @@ int main(int argc, char *argv[])
         // --- Solve momentum
         solve(fvm::ddt(rhoU) + fvc::div(phiUp));
 
-        gradRho = fvc::grad(rho);
-        gradT = fvc::grad(thermo.T());
-        gradP = fvc::grad(thermo.p());
+        // --- Calculate gradients
+        gradRho = fvc::grad(rho) / rho;
+        gradT = fvc::grad(thermo.T()) / thermo.T();
+        gradP = fvc::grad(thermo.p()) / thermo.p();
 
         U.ref() =
             rhoU()
