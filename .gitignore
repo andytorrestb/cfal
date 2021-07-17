@@ -1,0 +1,10 @@
+
+# Simulation Data #
+###################
+*/img/
+*/[0-9]
+
+
+# Compiled Source #
+###################
+*/linux64Gcc63DPInt32Opt/
