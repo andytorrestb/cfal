@@ -203,6 +203,14 @@ int main(int argc, char *argv[])
         gradT = fvc::grad(thermo.T()) / thermo.T();
         gradP = fvc::grad(thermo.p()) / thermo.p();
 
+        const dimensionedScalar meter(
+            "meter",
+            dimensionSet(0, 1, 0, 0, 0, 0, 0),
+            1
+        );
+
+        Kn = max(mag(gradRho) * meter, mag(gradT) * meter);
+
         U.ref() =
             rhoU()
            /rho();

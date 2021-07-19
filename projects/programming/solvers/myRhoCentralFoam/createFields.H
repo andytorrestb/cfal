@@ -77,7 +77,7 @@ volVectorField gradP
     fvc::grad(thermo.p()) / thermo.p()
 );
 
-volScalarField Kn
+volScalarField Kn 
 (
     IOobject
     (
