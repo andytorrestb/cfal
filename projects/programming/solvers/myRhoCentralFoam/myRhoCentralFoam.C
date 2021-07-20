@@ -204,17 +204,30 @@ int main(int argc, char *argv[])
 
 
         // --- Calculate Knudsen Number
-        const dimensionedScalar Kn_corrector(
-            "Kn_corrector",
-            dimensionSet(1, 0, -2, -1, 0, 0, 0),
-            1
+        const dimensionedScalar k( // Boltzmann constant
+            "k",
+            dimensionSet(1, 2, -2, -1, 0, 0, 0),
+            1.38e-23
+        );
+
+        const dimensionedScalar pi( // Mathematical Pi
+            "pi",
+            dimensionSet(0, 0, 0, 0, 0, 0, 0),
+            3.14159
+        );
+
+        const dimensionedScalar d( // Molecular diameter (N2)
+            "d",
+            dimensionSet(0, 1, 0, 0, 0, 0, 0),
+            4.17e-10
         );
 
         NormRho = fvc::grad(rho) / rho;
         NormT = fvc::grad(thermo.T()) / thermo.T();
-        lambda = thermo.T() / thermo.p();
+        // NormU = fvc::grad(U);
+        lambda = (k * thermo.T()) / (1.41 * pi * d * d * thermo.p());
 
-        Kn = lambda * Kn_corrector * max(mag(NormRho), mag(NormT));
+        Kn = lambda * max(mag(NormRho), mag(NormT));
 
         U.ref() =
             rhoU()

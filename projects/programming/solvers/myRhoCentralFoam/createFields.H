@@ -74,7 +74,8 @@ volScalarField lambda
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    thermo.T() / thermo.p()
+    mesh,
+    dimensionedScalar("meter", dimLength, 1.0)
 );
 
 // volVectorField NormU
@@ -87,7 +88,8 @@ volScalarField lambda
 //         IOobject::NO_READ,
 //         IOobject::AUTO_WRITE
 //     ),
-//     fvc::grad(U) / U
+//     // fvc::grad(U)*dimensionedScalar("U", dimVelocity, 1.0)
+//     fvc::grad(U)
 // );
 
 volScalarField Kn 
