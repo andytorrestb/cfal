@@ -198,18 +198,23 @@ int main(int argc, char *argv[])
         // --- Solve momentum
         solve(fvm::ddt(rhoU) + fvc::div(phiUp));
 
-        // --- Calculate gradients
-        gradRho = fvc::grad(rho) / rho;
-        gradT = fvc::grad(thermo.T()) / thermo.T();
-        gradP = fvc::grad(thermo.p()) / thermo.p();
+        // NormRho = mag(fvc::grad(rho)) / rho;
+        // NormT = mag(fvc::grad(thermo.T())) / thermo.T();
+        // gradP = fvc::grad(thermo.p()) / thermo.p();
 
-        const dimensionedScalar meter(
-            "meter",
-            dimensionSet(0, 1, 0, 0, 0, 0, 0),
+
+        // --- Calculate Knudsen Number
+        const dimensionedScalar Kn_corrector(
+            "Kn_corrector",
+            dimensionSet(1, 0, -2, -1, 0, 0, 0),
             1
         );
 
-        Kn = max(mag(gradRho) * meter, mag(gradT) * meter);
+        NormRho = fvc::grad(rho) / rho;
+        NormT = fvc::grad(thermo.T()) / thermo.T();
+        lambda = thermo.T() / thermo.p();
+
+        Kn = lambda * Kn_corrector * max(mag(NormRho), mag(NormT));
 
         U.ref() =
             rhoU()

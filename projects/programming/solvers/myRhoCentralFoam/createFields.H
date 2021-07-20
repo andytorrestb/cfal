@@ -38,11 +38,11 @@ volScalarField rho
 );
 
 // Custon Code: Gradient Fields
-volVectorField gradRho
+volVectorField NormRho
 (
     IOobject
     (
-        "gradRho",
+        "NormRho",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
@@ -51,11 +51,11 @@ volVectorField gradRho
     fvc::grad(rho) / rho
 );
 
-volVectorField gradT
+volVectorField NormT
 (
     IOobject
     (
-        "gradT",
+        "NormT",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
@@ -64,18 +64,31 @@ volVectorField gradT
     fvc::grad(thermo.T()) / thermo.T()
 );
 
-volVectorField gradP
+volScalarField lambda
 (
     IOobject
     (
-        "gradP",
+        "lambda",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    fvc::grad(thermo.p()) / thermo.p()
+    thermo.T() / thermo.p()
 );
+
+// volVectorField NormU
+// (
+//     IOobject
+//     (
+//         "NormU",
+//         runTime.timeName(),
+//         mesh,
+//         IOobject::NO_READ,
+//         IOobject::AUTO_WRITE
+//     ),
+//     fvc::grad(U) / U
+// );
 
 volScalarField Kn 
 (
