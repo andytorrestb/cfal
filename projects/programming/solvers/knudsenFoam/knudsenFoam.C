@@ -199,14 +199,11 @@ int main(int argc, char *argv[])
         solve(fvm::ddt(rhoU) + fvc::div(phiUp));
 
         // --- Calculate Knudsen Number
-        normU = mag(fvc::grad(mag(U))) / magU;
+        normU = mag(fvc::grad(mag(U))) / mag(U);
         normRho = mag(fvc::grad(rho)) / rho;
         normT = mag(fvc::grad(thermo.T())) / thermo.T();
-
         lambda = (k * thermo.T()) / (1.41 * pi * d * d  * thermo.p());
-
         Kn = lambda * max(normU, max(normRho, normT));
-
 
         U.ref() =
             rhoU()

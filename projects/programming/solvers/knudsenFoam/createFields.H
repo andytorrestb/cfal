@@ -37,102 +37,19 @@ volScalarField rho
     thermo.rho()
 );
 
-volScalarField magU
-(
-    IOobject
-    (
-        "magU",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mag(U)
-);
+// volScalarField magU
+// (
+//     IOobject
+//     (
+//         "magU",
+//         runTime.timeName(),
+//         mesh,
+//         IOobject::NO_READ,
+//         IOobject::AUTO_WRITE
+//     ),
+//     mag(U)
+// );
 
-volScalarField normU
-(
-    IOobject
-    (
-        "normU",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mag(fvc::grad(magU)) / magU
-);
-
-volScalarField normRho
-(
-    IOobject
-    (
-        "normRho",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mag(fvc::grad(rho)) / rho
-);
-
-volScalarField normT
-(
-    IOobject
-    (
-        "normT",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    mag(fvc::grad(thermo.T())) / thermo.T()
-);
-
-const dimensionedScalar k(
-    "k",
-    dimensionSet(1, 2, -2, -1, 0, 0, 0),
-    1.38e-23
-);
-
-
-const dimensionedScalar pi(
-    "k",
-    dimensionSet(0, 0, 0, 0, 0, 0, 0),
-    3.14159
-);
-
-const dimensionedScalar d(
-    "d",
-    dimensionSet(0, 1, 0, 0, 0, 0, 0),
-    4.17e-10
-);
-
-volScalarField lambda
-(
-    IOobject
-    (
-        "lambda",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    (k * thermo.T()) / (1.41 * pi * d * d  * thermo.p())
-);
-
-volScalarField Kn 
-(
-    IOobject
-    (
-        "Kn",
-        runTime.timeName(),
-        mesh,
-        IOobject::NO_READ,
-        IOobject::AUTO_WRITE
-    ),
-    rho / rho
-);
 
 volVectorField rhoU
 (
@@ -196,4 +113,88 @@ autoPtr<compressible::turbulenceModel> turbulence
         phi,
         thermo
     )
+);
+
+// --- Custom Code: Calculate Knudesn Number
+volScalarField normU
+(
+    IOobject
+    (
+        "normU",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mag(fvc::grad(mag(U))) / mag(U)
+);
+
+volScalarField normRho
+(
+    IOobject
+    (
+        "normRho",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mag(fvc::grad(rho)) / rho
+);
+
+volScalarField normT
+(
+    IOobject
+    (
+        "normT",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mag(fvc::grad(thermo.T())) / thermo.T()
+);
+
+const dimensionedScalar k(
+    "k",
+    dimensionSet(1, 2, -2, -1, 0, 0, 0),
+    1.38e-23
+);
+
+const dimensionedScalar pi(
+    "k",
+    dimensionSet(0, 0, 0, 0, 0, 0, 0),
+    3.14159
+);
+
+const dimensionedScalar d(
+    "d",
+    dimensionSet(0, 1, 0, 0, 0, 0, 0),
+    4.17e-10
+);
+
+volScalarField lambda
+(
+    IOobject
+    (
+        "lambda",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    (k * thermo.T()) / (1.41 * pi * d * d  * thermo.p())
+);
+
+volScalarField Kn 
+(
+    IOobject
+    (
+        "Kn",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    rho / rho
 );
