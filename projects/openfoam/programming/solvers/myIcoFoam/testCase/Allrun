@@ -1,0 +1,6 @@
+#!/bin/bash
+
+blockMesh
+setFields
+myIcoFoam
+
