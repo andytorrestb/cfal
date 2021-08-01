@@ -1,3 +1,0 @@
-knudsenFoam.C
-
-EXE = $(FOAM_APPBIN)/knudsenFoam
